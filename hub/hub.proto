@@ -3,12 +3,15 @@ syntax = "proto3";
 option go_package = "github.com/thor-electronics/core/hub";
 
 service HubCluster {
-  rpc GetHub (SelectHub) returns (Hub) {}
+  rpc GetHub(Hub) returns (Hub) {}
+  rpc CreateHub(Hub) returns (Hub) {}
+  rpc TerminateHub(Hub) returns (Hub) {}
+  // rpc GetHub (SelectHub) returns (Hub) {}
   // rpc GetHubs (SelectHubs) return (stream Hubs) {}
-  rpc CreateHub (CreateHubRequest) returns (Hub) {}
+  // rpc CreateHub (CreateHubRequest) returns (Hub) {}
   // rpc PauseHub (SelectHub) returns () {} // what about returning nothing?
   // pause / resume / start / run hub?
-  rpc TerminateHub (SelectHub) returns (Empty) {}
+  // rpc TerminateHub (SelectHub) returns (Empty) {}
   // Get hubs list
   // Get healthcheck
   // Get summary
@@ -20,16 +23,17 @@ message Empty {}
 
 message Hub {
   string group_id = 1;
-}
-
-message CreateHubRequest {
-  string group_id = 1;
   optional string password = 2;
 }
 
-message SelectHub {
-  string group_id = 1;
-}
+// message CreateHubRequest {
+//   string group_id = 1;
+//   optional string password = 2;
+// }
+
+// message SelectHub {
+//   string group_id = 1;
+// }
 
 message Hubs {
   repeated Hub hubs = 1;
