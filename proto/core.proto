@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option go_package = "github.com/thor-electronics/core";
+
+service HubCluster {
+  rpc GetHub (SelectHub) returns (Hub) {}
+  // rpc GetHubs (SelectHubs) return (stream Hubs) {}
+  rpc CreateHub (CreateHubRequest) returns (Hub) {}
+  // rpc PauseHub (SelectHub) returns () {} // what about returning nothing?
+  // pause / resume / start / run hub?
+  rpc TerminateHub (SelectHub) returns (Empty) {}
+  // Get hubs list
+  // Get healthcheck
+  // Get summary
+  // Get profiling and memory stats etc. load.
+  // Get management and administration info etc.
+}
+
+message Empty {}
+
+message Hub {
+  string group_id = 1;
+}
+
+message CreateHubRequest {
+  string group_id = 1;
+  optional string password = 2;
+}
+
+message SelectHub {
+  string group_id = 1;
+}
+
+message Hubs {
+  repeated Hub hubs = 1;
+  optional int32 count = 2;
+}
+
+
+// service User {
+//   rpc GetUser (GetUserRequest) returns (User) {}
+//   rpc ListUsers (ListUsersRequest) returns (stream ListUsersResponse) {}
+// }
+
+// message GetUserRequest {
+//   string id = 1;
+// }
+
+// message User {
+//   string id = 1;
+// }
+
+// service Auth {
+//   //
+// }
+
+// service Payment {
+//   //
+// }
