@@ -1,9 +1,10 @@
 syntax = "proto3";
 
-option go_package = "github.com/thor-electronics/core/hub";
+option go_package = "github.com/thor-electronics/core/hub/proto";
 
 service HubCluster {
   rpc GetHub(Hub) returns (Hub) {}
+  rpc ListHubs(Empty) returns (stream Hub) {}
   rpc CreateHub(Hub) returns (Hub) {}
   rpc TerminateHub(Hub) returns (Hub) {}
   // rpc GetHub (SelectHub) returns (Hub) {}
@@ -23,7 +24,7 @@ message Empty {}
 
 message Hub {
   string group_id = 1;
-  optional string password = 2;
+  // optional string password = 2;
 }
 
 // message CreateHubRequest {
@@ -37,5 +38,6 @@ message Hub {
 
 message Hubs {
   repeated Hub hubs = 1;
-  optional int32 count = 2;
+  int32 count = 2;
+  // optional int32 count = 2;
 }
